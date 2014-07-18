@@ -1,29 +1,19 @@
 #!/bin/bash
-rm dist/*
-find -name '*.pyc' | xargs rm
+set -x
 
-./deb.sh vh
-./deb.sh vh-gunicorn
-./deb.sh vh-mysql
-./deb.sh vh-nginx
-./deb.sh vh-php-fpm
-./deb.sh vh-unicorn
-./deb.sh vh-vsftpd
-./deb.sh vh-pureftpd
-./deb.sh vh-puma
-./deb.sh vh-nodejs
-./deb.sh vh-mail
+rm -f dist/*
+find -name '*.pyc' -delete
 
-./rpm.sh vh
-./rpm.sh vh-gunicorn
-./rpm.sh vh-mysql
-./rpm.sh vh-nginx
-./rpm.sh vh-php-fpm
-./rpm.sh vh-unicorn
-./rpm.sh vh-vsftpd
-./rpm.sh vh-pureftpd
-./rpm.sh vh-puma
-./rpm.sh vh-nodejs
-./rpm.sh vh-mail
+./$1.sh vh
+./$1.sh vh-gunicorn
+./$1.sh vh-mail
+./$1.sh vh-mysql
+./$1.sh vh-nginx
+./$1.sh vh-nodejs
+./$1.sh vh-php-fpm
+./$1.sh vh-puma
+./$1.sh vh-pureftpd
+./$1.sh vh-unicorn
+./$1.sh vh-vsftpd
 
-rm -r build
+rm -fr build
